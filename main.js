@@ -132,14 +132,17 @@
     return tl;
   }
 
-  // Hero-Inhalt beim Scrollen wegschieben
-  gsap.to('.hero__content', {
-    yPercent: -18, opacity: 0, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 15%', scrub: true }
-  });
-  gsap.to('.hero__image img', {
-    yPercent: 10, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  // Hero-Inhalt beim Scrollen wegschieben (nur Desktop: dort stehen Text und Foto nebeneinander;
+  // auf dem Handy steht das Foto unter dem Text, der Effekt würde eine Lücke erzeugen)
+  gsap.matchMedia().add('(min-width: 901px)', () => {
+    gsap.to('.hero__content', {
+      yPercent: -18, opacity: 0, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 15%', scrub: true }
+    });
+    gsap.to('.hero__image img', {
+      yPercent: 10, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
   });
 
   /* -------------------------------------------------------

@@ -1565,3 +1565,60 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
 
 @media (max-width: 900px) { .callback-section__grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .final__callback .callback__fields { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   HANDY-FEINSCHLIFF
+   ========================================================= */
+@media (max-width: 900px) {
+  /* Teamfoto näher an die Google-Bewertung, Gesichter weiter oben im Bild */
+  .hero__content { padding-bottom: 1.4rem; }
+  .hero__proof { margin-top: 1.2rem; }
+  .hero__image img { object-position: 50% 72%; }
+  .hero__image-fade { background: linear-gradient(180deg, var(--bg) 0%, transparent 10%); }
+}
+
+@media (max-width: 700px) {
+  /* Kopfzeile: Logo mittig */
+  .nav--logo-right { justify-content: center; }
+
+  /* Abstände insgesamt kompakter */
+  .section, .steps { padding-block: 3.5rem; }
+  .section-head { margin-bottom: 2rem; }
+  .display { margin-bottom: 1rem; }
+  .eyebrow { margin-bottom: .9rem; }
+  .problem__statement { font-size: 1.7rem; margin-bottom: 2.2rem; }
+  .reframe { min-height: 0; }
+  .stats { margin-bottom: 2.2rem; }
+  .tour { margin-bottom: 2.2rem; }
+  .future__cards { margin-bottom: 2rem; }
+  .results__grid { margin-bottom: 3rem; }
+  .stats--team { margin-top: 2.2rem; }
+  .men { margin-top: 1.4rem; }
+  .price-quote { margin-top: 1.6rem; }
+  .final__sub { margin: 1rem auto 2.2rem; }
+  .orb-btn { margin-bottom: 2.4rem; }
+  .final__callback { margin-top: 2.2rem; }
+
+  /* Schmerzbereich: Karten untereinander, nichts wird rechts abgeschnitten */
+  .pain-layout .pain-grid { grid-template-columns: 1fr; }
+  .pain-layout .pain--wide { grid-column: auto; }
+  .pain-layout > *, .pain-layout .pain-grid > * { min-width: 0; }
+  .pain-feature__photo { aspect-ratio: 16 / 10; min-height: 0; flex: none; }
+  .pain { padding: 1.5rem 1.3rem; }
+  .pain-layout .pain .pain__num { margin-bottom: .8rem; }
+
+  /* Footer: zentriert und aufgeräumt */
+  .footer { padding-block: 2.6rem 6.5rem; text-align: center; }
+  .footer__inner { grid-template-columns: 1fr; justify-items: center; gap: 1.1rem; }
+  .footer .nav__logo { justify-content: center; }
+  .logo-img--footer { height: 84px; }
+  .footer address { line-height: 1.6; }
+  .footer__links { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .4rem 1.3rem; font-size: .82rem; }
+  .footer__fine { width: 100%; padding-top: 1.2rem; font-size: .68rem; line-height: 1.6; }
+}
+.hero > * { min-width: 0; }
+@media (max-width: 600px) {
+  /* Die drei Häkchen-Punkte untereinander statt umbrechend (Trennpunkte ausgeblendet) */
+  .microcopy { display: flex; flex-direction: column; gap: .2rem; font-size: 0; }
+  .microcopy span { font-size: .8rem; white-space: nowrap; }
+}
