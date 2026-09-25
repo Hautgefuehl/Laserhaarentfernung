@@ -258,7 +258,7 @@
   <link rel="preload" href="fonts/montserrat-latin-e56e84.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts/fonts.css">
 
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body>
 
@@ -718,6 +718,44 @@
       </div>
     </section>
 
+
+    <!-- ============ RÜCKRUF (Formular) ============ -->
+    <section class="callback-section section" id="rueckruf">
+      <div class="container callback-section__grid">
+        <div class="callback-section__text">
+          <p class="eyebrow" data-reveal>Lieber persönlich sprechen?</p>
+          <h2 class="display" data-split="lines">Wir rufen<br><em>dich zurück.</em></h2>
+          <p data-reveal>Du hast noch Fragen, bevor du buchst? Hinterlass einfach deinen Namen und deine Handynummer. Wir melden uns innerhalb von 24 Stunden, beantworten alles in Ruhe und finden gemeinsam einen Termin.</p>
+          <ul class="checklist">
+            <li data-reveal><span>✓</span>Kostenlos &amp; unverbindlich</li>
+            <li data-reveal><span>✓</span>Rückruf innerhalb von 24 Stunden</li>
+            <li data-reveal><span>✓</span>Kein Verkaufsgespräch</li>
+          </ul>
+        </div>
+        <div class="callback-card glass" data-reveal>
+          <form class="callback" action="anfrage.php" method="post" novalidate>
+            <div class="callback__fields">
+              <label class="callback__field" for="cb-name-a"><span>Dein Name</span>
+                <input id="cb-name-a" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
+              <label class="callback__field" for="cb-tel-a"><span>Deine Handynummer</span>
+                <input id="cb-tel-a" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="z. B. 0151 23456789"></label>
+            </div>
+            <label class="callback__consent" for="cb-ok-a">
+              <input id="cb-ok-a" type="checkbox" name="einwilligung" value="ja" required>
+              <span>Ich bin einverstanden, dass Hautgefühl mich zur Terminvereinbarung zurückruft und meine Angaben dafür verwendet. Mehr dazu in der <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span>
+            </label>
+            <div class="callback__hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <input type="hidden" name="t" value="">
+            <input type="hidden" name="quelle" value="">
+            <input type="hidden" name="position" value="Abschnitt nach den Preisen">
+            <button type="submit" class="btn btn--gold btn--lg callback__submit"><span class="btn__text">Rückruf anfordern</span><span class="btn__icon" aria-hidden="true">→</span></button>
+            <p class="callback__note">Wir melden uns innerhalb von 24 Stunden. Kostenlos &amp; unverbindlich.</p>
+            <p class="callback__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ STUDIO (Wohlfühlen & Hygiene sichtbar machen) ============ -->
     <section class="studio section" id="studio">
       <div class="container">
@@ -865,6 +903,28 @@
           <a href="tel:+4915906199525" class="contact__item glass" data-magnetic data-strength="0.2"><small>Anrufen</small>0159 06199525</a>
           <a href="mailto:info@hautgefuehl-emmelshausen.de" class="contact__item glass" data-magnetic data-strength="0.2"><small>E-Mail</small>info@hautgefuehl-emmelshausen.de</a>
         </div>
+        <div class="final__callback glass" data-reveal>
+          <p class="final__callback-title">Oder lieber zurückrufen lassen?</p>
+          <form class="callback" action="anfrage.php" method="post" novalidate>
+            <div class="callback__fields">
+              <label class="callback__field" for="cb-name-b"><span>Dein Name</span>
+                <input id="cb-name-b" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
+              <label class="callback__field" for="cb-tel-b"><span>Deine Handynummer</span>
+                <input id="cb-tel-b" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="z. B. 0151 23456789"></label>
+            </div>
+            <label class="callback__consent" for="cb-ok-b">
+              <input id="cb-ok-b" type="checkbox" name="einwilligung" value="ja" required>
+              <span>Ich bin einverstanden, dass Hautgefühl mich zur Terminvereinbarung zurückruft und meine Angaben dafür verwendet. Mehr dazu in der <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span>
+            </label>
+            <div class="callback__hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <input type="hidden" name="t" value="">
+            <input type="hidden" name="quelle" value="">
+            <input type="hidden" name="position" value="Abschlussbereich">
+            <button type="submit" class="btn btn--gold btn--lg callback__submit"><span class="btn__text">Rückruf anfordern</span><span class="btn__icon" aria-hidden="true">→</span></button>
+            <p class="callback__note">Wir melden uns innerhalb von 24 Stunden. Kostenlos &amp; unverbindlich.</p>
+            <p class="callback__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
@@ -904,6 +964,6 @@
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="vendor/lenis.min.js"></script>
   <script src="consent.js?v=1"></script>
-  <script src="main.js?v=5"></script>
+  <script src="main.js?v=6"></script>
 </body>
 </html>

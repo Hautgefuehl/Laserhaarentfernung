@@ -373,6 +373,58 @@
   })();
 
   /* -------------------------------------------------------
+     RÜCKRUF-FORMULAR · Versand per E-Mail über anfrage.php
+     ------------------------------------------------------- */
+  (function callback() {
+    const forms = $$('.callback');
+    if (!forms.length) return;
+    const FALLBACK = 'Das hat leider nicht geklappt. Ruf uns gern an unter <a href="tel:+4915906199525">0159 06199525</a> oder schreib uns auf <a href="https://wa.me/4915906199525" target="_blank" rel="noopener">WhatsApp</a>.';
+    const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    forms.forEach(form => {
+      form.elements.t.value = Math.floor(Date.now() / 1000);
+      form.elements.quelle.value = (location.search || '').slice(0, 200);
+      const status = $('.callback__status', form);
+      const btn = $('.callback__submit', form);
+      const show = (msg, isError) => { status.innerHTML = msg; status.classList.toggle('is-error', !!isError); };
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const name = form.elements.name.value.trim();
+        const tel = form.elements.telefon.value.trim();
+        const digits = tel.replace(/\D/g, '');
+        if (name.length < 2) { show('Bitte gib deinen Namen ein.', true); form.elements.name.focus(); return; }
+        if (!/^[0-9+()\/\s.-]{6,25}$/.test(tel) || digits.length < 6 || digits.length > 16) { show('Bitte gib eine gültige Handynummer ein.', true); form.elements.telefon.focus(); return; }
+        if (!form.elements.einwilligung.checked) { show('Bitte bestätige, dass wir dich zurückrufen dürfen.', true); return; }
+
+        btn.disabled = true; btn.classList.add('is-loading'); show('Wird gesendet …');
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          const data = await res.json().catch(() => null);
+          if (data && data.ok) {
+            form.classList.add('is-sent');
+            form.innerHTML = `<div class="callback__success"><span class="callback__success-icon" aria-hidden="true">✓</span><p class="callback__success-title">Danke, ${esc(name.split(' ')[0])}!</p><p>Wir rufen dich innerhalb von 24 Stunden unter <strong>${esc(tel)}</strong> zurück.</p></div>`;
+            if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Rückruf-Formular' });
+          } else {
+            show(data && data.message ? esc(data.message) : FALLBACK, true);
+            btn.disabled = false; btn.classList.remove('is-loading');
+          }
+        } catch (err) {
+          show(FALLBACK, true);
+          btn.disabled = false; btn.classList.remove('is-loading');
+        }
+      });
+    });
+
+    // Rückmeldung, falls das Formular ohne JavaScript abgeschickt wurde
+    const p = new URLSearchParams(location.search).get('anfrage');
+    if (p) {
+      const s = $('#rueckruf .callback__status');
+      if (s) { s.innerHTML = p === 'ok' ? 'Danke! Wir rufen dich innerhalb von 24 Stunden zurück.' : FALLBACK; s.classList.toggle('is-error', p !== 'ok'); }
+    }
+  })();
+
+  /* -------------------------------------------------------
      FAQ · weiches Auf-/Zuklappen
      ------------------------------------------------------- */
   $$('.faq__item').forEach(item => {
