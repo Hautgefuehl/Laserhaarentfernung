@@ -6,7 +6,7 @@
   'use strict';
 
   // >>> Hier deine Meta-Pixel-ID eintragen (nur Ziffern), z. B. '123456789012345'
-  const META_PIXEL_ID = '';
+  const META_PIXEL_ID = '1353147353315743';
 
   const KEY = 'hg-consent';        // gespeicherte Auswahl: 'all' | 'necessary'
   const banner = document.getElementById('consent');
