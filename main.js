@@ -164,15 +164,12 @@
       scrollTrigger: { trigger: inHero || el.parentElement, start: inHero ? 'top top' : 'top bottom', end: 'bottom top', scrub: true }
     });
   });
-  // Riesiger Outline-Schriftzug in der Tech-Section
-  gsap.fromTo('.tech__bigword', { xPercent: 5 }, {
-    xPercent: -35, ease: 'none',
-    scrollTrigger: { trigger: '.tech', start: 'top bottom', end: 'bottom top', scrub: true }
-  });
-  // Reframe-Überschrift leicht schneller als der Rest
-  gsap.to('.reframe__inner', {
-    y: -60, ease: 'none',
-    scrollTrigger: { trigger: '.reframe', start: 'top bottom', end: 'bottom top', scrub: true }
+  // Reframe-Überschrift leicht schneller als der Rest (nur Desktop, auf dem Handy entstünde eine Lücke)
+  gsap.matchMedia().add('(min-width: 901px)', () => {
+    gsap.to('.reframe__inner', {
+      y: -60, ease: 'none',
+      scrollTrigger: { trigger: '.reframe', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
   });
 
   /* -------------------------------------------------------
@@ -328,6 +325,23 @@
     const pos = { v: 50 };
     const set = v => ba.style.setProperty('--pos', v + '%');
     range.addEventListener('input', () => { gsap.killTweensOf(pos); pos.v = +range.value; set(pos.v); });
+    // Mit der Maus (oder dem Finger) direkt im Bild hin und her ziehen
+    let dragging = false;
+    const moveTo = e => {
+      const r = ba.getBoundingClientRect();
+      gsap.killTweensOf(pos);
+      pos.v = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+      set(pos.v); range.value = pos.v;
+    };
+    ba.addEventListener('pointerdown', e => {
+      dragging = true; ba.classList.add('is-dragging');
+      try { ba.setPointerCapture(e.pointerId); } catch (_) {}
+      moveTo(e); e.preventDefault();
+    });
+    ba.addEventListener('pointermove', e => { if (dragging) moveTo(e); });
+    const stop = () => { dragging = false; ba.classList.remove('is-dragging'); };
+    ba.addEventListener('pointerup', stop);
+    ba.addEventListener('pointercancel', stop);
     // Kleiner Hinweis-Wisch, damit man merkt: das ist interaktiv
     const hint = () => gsap.timeline({ onUpdate: () => { set(pos.v); range.value = pos.v; } })
       .to(pos, { v: 80, duration: 0.9, ease: 'power2.inOut' })
