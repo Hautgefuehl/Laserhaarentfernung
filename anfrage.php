@@ -67,7 +67,6 @@ if ($anzahl >= MAX_PRO_STUNDE) {
 $bereinigen = static fn(string $s): string => trim(preg_replace('/[\r\n\t]+/', ' ', $s) ?? '');
 $name    = $bereinigen((string)($_POST['name'] ?? ''));
 $telefon = $bereinigen((string)($_POST['telefon'] ?? ''));
-$einwilligung = ($_POST['einwilligung'] ?? '') === 'ja';
 $quelle  = substr($bereinigen((string)($_POST['quelle'] ?? '')), 0, 200);
 $position = substr($bereinigen((string)($_POST['position'] ?? '')), 0, 40);
 
@@ -77,9 +76,6 @@ if (mb_strlen($name) < 2 || mb_strlen($name) > 80) {
 $ziffern = preg_replace('/\D+/', '', $telefon) ?? '';
 if (!preg_match('/^[0-9+()\/\s.-]{6,25}$/', $telefon) || strlen($ziffern) < 6 || strlen($ziffern) > 16) {
     antwort(false, 'Bitte gib eine gültige Handynummer ein.', 422);
-}
-if (!$einwilligung) {
-    antwort(false, 'Bitte bestätige, dass wir dich zurückrufen dürfen.', 422);
 }
 
 /* --- E-Mail zusammenstellen --- */
@@ -92,7 +88,7 @@ $text = "Neue Rückruf-Anfrage über die Landingpage\n"
       . "Eingegangen:   {$zeit} Uhr\n"
       . "Formular:      " . ($position !== '' ? $position : 'unbekannt') . "\n"
       . ($quelle !== '' ? "Herkunft/Link: {$quelle}\n" : '')
-      . "\nDie Person hat eingewilligt, zur Terminvereinbarung zurückgerufen zu werden.\n";
+      . "\nDie Person bittet um einen Rückruf zur Terminvereinbarung.\n";
 
 $kopf = [
     'From: ' . mb_encode_mimeheader('Hautgefühl Landingpage', 'UTF-8') . ' <' . ABSENDER . '>',

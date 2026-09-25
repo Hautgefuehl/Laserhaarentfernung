@@ -412,7 +412,6 @@
         const digits = tel.replace(/\D/g, '');
         if (name.length < 2) { show('Bitte gib deinen Namen ein.', true); form.elements.name.focus(); return; }
         if (!/^[0-9+()\/\s.-]{6,25}$/.test(tel) || digits.length < 6 || digits.length > 16) { show('Bitte gib eine gültige Handynummer ein.', true); form.elements.telefon.focus(); return; }
-        if (!form.elements.einwilligung.checked) { show('Bitte bestätige, dass wir dich zurückrufen dürfen.', true); return; }
 
         btn.disabled = true; btn.classList.add('is-loading'); show('Wird gesendet …');
         try {
@@ -421,7 +420,7 @@
           if (data && data.ok) {
             form.classList.add('is-sent');
             form.innerHTML = `<div class="callback__success"><span class="callback__success-icon" aria-hidden="true">✓</span><p class="callback__success-title">Danke, ${esc(name.split(' ')[0])}!</p><p>Wir rufen dich innerhalb von 24 Stunden unter <strong>${esc(tel)}</strong> zurück.</p></div>`;
-            if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Rückruf-Formular' });
+            if (window.fbq && window.hgConsentAll && window.hgConsentAll()) window.fbq('track', 'Lead', { content_name: 'Rückruf-Formular' });
           } else {
             show(data && data.message ? esc(data.message) : FALLBACK, true);
             btn.disabled = false; btn.classList.remove('is-loading');

@@ -1,23 +1,53 @@
 /* =========================================================
    HAUTGEFÜHL · Einwilligung (Cookie-Banner) + Meta-Pixel
-   Das Pixel lädt erst, nachdem die Besucherin zugestimmt hat.
+   - Das Pixel lädt erst, nachdem die Besucherin zugestimmt hat.
+   - Die Einwilligung gilt 12 Monate, danach wird neu gefragt.
+   - Jede Auswahl wird anonym protokolliert (consent-log.php):
+     Zeitpunkt, Auswahl und eine Zufalls-ID, keine IP-Adresse.
    ========================================================= */
 (() => {
   'use strict';
 
-  // >>> Hier deine Meta-Pixel-ID eintragen (nur Ziffern), z. B. '123456789012345'
+  // Meta-Pixel-ID (nur Ziffern)
   const META_PIXEL_ID = '1353147353315743';
 
-  const KEY = 'hg-consent';        // gespeicherte Auswahl: 'all' | 'necessary'
+  const KEY = 'hg-consent';
+  const GUELTIG_MS = 365 * 24 * 60 * 60 * 1000;   // 12 Monate
+  const BANNER_VERSION = '2026-09';                 // bei neuem Banner-Text erhöhen => alle werden neu gefragt
   const banner = document.getElementById('consent');
   if (!banner) return;
 
-  const read = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
-  const save = v => { try { localStorage.setItem(KEY, v); } catch (e) { /* privater Modus */ } };
+  const read = () => {
+    try {
+      const d = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (!d || typeof d !== 'object' || !d.choice || !d.ts) return null;           // alte oder leere Einträge
+      if (d.v !== BANNER_VERSION || Date.now() - d.ts > GUELTIG_MS) return null;   // abgelaufen
+      return d;
+    } catch (e) { return null; }
+  };
+  const newId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+    : 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+
+  // Anonymes Protokoll auf dem eigenen Server (Nachweis nach Art. 7 Abs. 1 DSGVO)
+  const protokoll = rec => {
+    try {
+      const body = new URLSearchParams({ id: rec.id, choice: rec.choice, v: rec.v });
+      if (navigator.sendBeacon) navigator.sendBeacon('consent-log.php', body);
+      else fetch('consent-log.php', { method: 'POST', body, keepalive: true }).catch(() => {});
+    } catch (e) { /* Protokoll darf die Seite nie stören */ }
+  };
+
+  const save = choice => {
+    const prev = read();
+    const rec = { choice, ts: Date.now(), v: BANNER_VERSION, id: (prev && prev.id) || newId() };
+    try { localStorage.setItem(KEY, JSON.stringify(rec)); } catch (e) { /* privater Modus */ }
+    protokoll(rec);
+  };
 
   let pixelLoaded = false;
   function loadPixel() {
-    if (pixelLoaded || !META_PIXEL_ID) return;
+    if (!META_PIXEL_ID) return;
+    if (pixelLoaded) { window.fbq && window.fbq('consent', 'grant'); return; }
     pixelLoaded = true;
     /* Offizieller Meta-Pixel-Basiscode */
     !function (f, b, e, v, n, t, s) {
@@ -28,10 +58,13 @@
     window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
   }
+  // Widerruf während des Besuchs: Pixel sofort stummschalten
+  const revokePixel = () => { if (pixelLoaded && window.fbq) window.fbq('consent', 'revoke'); };
 
-  // Klicks messen (nur wenn das Pixel geladen ist)
+  // Klicks messen (nur wenn das Pixel geladen ist und die Einwilligung gilt)
   document.addEventListener('click', e => {
-    if (!pixelLoaded || !window.fbq) return;
+    const d = read();
+    if (!pixelLoaded || !window.fbq || !d || d.choice !== 'all') return;
     const a = e.target.closest('a');
     if (!a) return;
     if (a.href.includes('studiobookr.com')) window.fbq('track', 'Lead', { content_name: 'Termin buchen' });
@@ -43,12 +76,15 @@
   const hide = () => { banner.classList.remove('is-visible'); setTimeout(() => { banner.hidden = true; }, 400); };
 
   banner.querySelector('[data-consent="all"]').addEventListener('click', () => { save('all'); hide(); loadPixel(); });
-  banner.querySelector('[data-consent="necessary"]').addEventListener('click', () => { save('necessary'); hide(); });
+  banner.querySelector('[data-consent="necessary"]').addEventListener('click', () => { save('necessary'); hide(); revokePixel(); });
 
   // "Cookie-Einstellungen" im Footer öffnet das Banner erneut
   document.querySelectorAll('[data-consent-open]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); show(); }));
 
-  const choice = read();
-  if (choice === 'all') loadPixel();
-  else if (!choice) setTimeout(show, 1200);
+  // Für andere Skripte (z. B. Formular): gilt die Marketing-Einwilligung?
+  window.hgConsentAll = () => { const d = read(); return !!(d && d.choice === 'all'); };
+
+  const d = read();
+  if (d && d.choice === 'all') loadPixel();
+  else if (!d) setTimeout(show, 1200);
 })();

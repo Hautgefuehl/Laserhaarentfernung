@@ -1,0 +1,16 @@
+# =========================================================
+# Hautgefühl Landingpage: Sicherheits-Header (DSGVO Art. 32)
+# Gilt nur für den Ordner /landingpage/, nicht für WordPress.
+# =========================================================
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# Einwilligungs-Protokoll niemals ausliefern
+<IfModule mod_alias.c>
+  RedirectMatch 404 /consent-log(/|$)
+</IfModule>

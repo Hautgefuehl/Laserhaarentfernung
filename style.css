@@ -1641,3 +1641,10 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
   .contact__item { width: 100%; padding: .85rem 1.1rem; font-size: .9rem; white-space: nowrap; }
   .contact__item[href^="mailto"] { font-size: .82rem; }
 }
+
+/* Datenschutz-Hinweis am Formular (statt Pflicht-Checkbox) */
+.callback__privacy { margin: 1rem 0 1.2rem; font-size: .78rem; line-height: 1.5; color: var(--text-faint); }
+.callback__privacy a { color: var(--gold-light); text-decoration: underline; }
+/* Impressum/Datenschutz direkt im Cookie-Banner */
+.consent__links { margin-top: .8rem; font-size: .74rem; text-align: center; color: var(--text-faint); }
+.consent__links a { color: var(--text-dim); text-decoration: underline; }
