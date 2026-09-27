@@ -1683,3 +1683,19 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
 
 /* Hinweis auf Weiterleitung zur Online-Buchung */
 .microcopy--redirect { margin-top: .35rem; font-size: .72rem; }
+
+/* Vorher/Nachher-Miniaturen: immer eine Zeile zum Durchswipen */
+.ba-picker {
+  display: flex; gap: .5rem; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; scrollbar-width: none;
+  padding: 5px 2px .5rem; margin-top: .6rem; cursor: grab;
+  -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, #000 82%, transparent);
+}
+.ba-picker::-webkit-scrollbar { display: none; }
+.ba-picker.is-end { -webkit-mask-image: none; mask-image: none; }
+.ba-picker.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.ba-picker.is-dragging .ba-pick { pointer-events: none; }
+.ba-pick { flex: 0 0 78px; scroll-snap-align: start; }
+.ba-pick img { -webkit-user-drag: none; user-select: none; }
+@media (max-width: 900px) { .ba-pick { flex-basis: 66px; } }

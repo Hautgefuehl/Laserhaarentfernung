@@ -386,6 +386,34 @@
         } });
       });
     });
+
+    // Miniaturen: eine Zeile zum Durchswipen (Finger nativ, Maus per Ziehen)
+    const picker = $('.ba-picker');
+    if (picker) {
+      const edge = () => picker.classList.toggle('is-end', picker.scrollLeft + picker.clientWidth >= picker.scrollWidth - 4);
+      picker.addEventListener('scroll', edge, { passive: true });
+      window.addEventListener('resize', edge);
+      edge();
+      let down = false, moved = false, sx = 0, sl = 0;
+      picker.addEventListener('pointerdown', e => {
+        if (e.pointerType !== 'mouse') return;
+        down = true; moved = false; sx = e.clientX; sl = picker.scrollLeft;
+      });
+      window.addEventListener('pointermove', e => {
+        if (!down) return;
+        const dx = e.clientX - sx;
+        if (Math.abs(dx) > 5) { moved = true; picker.classList.add('is-dragging'); }
+        if (moved) picker.scrollLeft = sl - dx;
+      });
+      window.addEventListener('pointerup', () => { down = false; picker.classList.remove('is-dragging'); });
+      // Nach dem Ziehen keinen Klick auslösen
+      picker.addEventListener('click', e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+      // Angeklickte Miniatur ins Sichtfeld holen
+      $$('.ba-pick', picker).forEach(btn => btn.addEventListener('click', () => {
+        const l = btn.offsetLeft - (picker.clientWidth - btn.offsetWidth) / 2;
+        picker.scrollTo({ left: l, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }));
+    }
   })();
 
   /* -------------------------------------------------------
