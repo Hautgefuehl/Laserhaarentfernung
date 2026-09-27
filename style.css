@@ -1742,3 +1742,31 @@ a.google-badge { color: inherit; text-decoration: none; transition: transform .3
 a.google-badge:hover { transform: translateY(-2px); }
 .reviews__title a, .stat__label a { color: inherit; text-decoration: underline; text-decoration-color: rgba(158, 116, 48, .45); text-underline-offset: .2em; }
 .reviews__title a:hover, .stat__label a:hover { text-decoration-color: currentColor; }
+
+/* =========================================================
+   HANDY: Teamfoto direkt unter dem Button,
+   Beschreibung und Häkchen darunter
+   ========================================================= */
+.hero__photo-m { display: none; }
+@media (max-width: 700px) {
+  .hero__ctas { display: contents; }
+  .hero__title { order: 1; }
+  .hero-offers { order: 2; width: 100%; }
+  .hero__ctas > .btn { order: 3; width: 100%; }
+  .microcopy--redirect { order: 4; margin-top: .45rem; }
+  .hero__photo-m { order: 5; }
+  .hero__sub { order: 6; margin: 1.1rem 0 .3rem; }
+  .hero__ctas > .microcopy:not(.microcopy--redirect) { order: 7; }
+  .hero__proof, .hero__image, .hero__scroll { display: none; }
+
+  .hero__photo-m {
+    display: block; position: relative; margin: .9rem calc(-1 * var(--pad)) 0;
+    width: calc(100% + 2 * var(--pad)); height: min(98vw, 420px); overflow: hidden;
+  }
+  .hero__photo-m img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 92%; }
+  .hero__photo-badge {
+    position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+    white-space: nowrap; background: rgba(255, 255, 255, .95);
+  }
+  .hero__photo-badge:hover { transform: translateX(-50%) translateY(-2px); }
+}
