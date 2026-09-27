@@ -93,6 +93,8 @@ p + p { margin-top: 1rem; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Verlauf bis unter die Unterlängen (g, p, y) ziehen, sonst werden sie unsichtbar */
+  padding-bottom: .22em; margin-bottom: -.22em;
 }
 
 /* ---------- Glass ---------- */
