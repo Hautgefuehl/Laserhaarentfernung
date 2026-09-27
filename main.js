@@ -379,7 +379,7 @@
           after.alt = btn.dataset.zone + ' nach der Laserbehandlung';
           before.alt = btn.dataset.zone + ' vor der Laserbehandlung';
           zone.textContent = btn.dataset.zone;
-          $('.ba__tag--r', ba).textContent = btn.dataset.afterLabel || 'Nachher';
+          $('.ba__tag--r', ba).textContent = (btn.dataset.afterLabel || 'Nachher') + '*';
           gsap.killTweensOf(pos); pos.v = 50; set(50); range.value = 50;
           gsap.to([after, before], { opacity: 1, duration: 0.4 });
           if (!reduceMotion) hint();

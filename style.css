@@ -1659,3 +1659,8 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
 .reviews__row.is-dragging { cursor: grabbing; }
 /* 22) Teamfoto im Studio-Streifen */
 .studio__static[src*="team-laser"] { object-position: 50% 45%; }
+
+/* Links in FAQ-Antworten + Hinweis unter Vorher/Nachher */
+.faq__body p + p { margin-top: -.6rem; }
+.faq__body a { color: var(--gold-light); text-decoration: underline; text-underline-offset: .15em; }
+.ba__note { margin-top: .8rem; font-size: .74rem; line-height: 1.5; color: var(--text-faint); }
