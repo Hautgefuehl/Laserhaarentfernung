@@ -214,8 +214,8 @@
   // Tech-Bild: Clip-Reveal
   $$('.clip-reveal').forEach(el => {
     gsap.to(el, {
-      clipPath: 'inset(0% 0 0 0)', duration: 1.6, ease: 'expo.inOut',
-      scrollTrigger: { trigger: el, start: 'top 80%', once: true }
+      clipPath: 'inset(0% 0 0 0)', duration: 1, ease: 'expo.out',
+      scrollTrigger: { trigger: el, start: 'top 98%', once: true }
     });
   });
 
@@ -269,6 +269,23 @@
     const loop = gsap.fromTo(track, { xPercent: dir < 0 ? 0 : -50 }, { xPercent: dir < 0 ? -50 : 0, duration: 55, ease: 'none', repeat: -1 });
     row.addEventListener('mouseenter', () => gsap.to(loop, { timeScale: 0.15, duration: 0.6 }));
     row.addEventListener('mouseleave', () => gsap.to(loop, { timeScale: 1, duration: 0.6 }));
+    // Mit der Maus (oder dem Finger) selbst nach links/rechts ziehen
+    let dragging = false, startX = 0, startP = 0;
+    row.addEventListener('pointerdown', e => {
+      dragging = true; startX = e.clientX; startP = loop.progress(); loop.pause();
+      row.classList.add('is-dragging');
+      try { row.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    row.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const half = track.scrollWidth / 2;
+      const dx = e.clientX - startX;
+      const p = startP + (dir < 0 ? -dx : dx) / half;
+      loop.progress(((p % 1) + 1) % 1);
+    });
+    const release = () => { if (!dragging) return; dragging = false; row.classList.remove('is-dragging'); loop.play(); };
+    row.addEventListener('pointerup', release);
+    row.addEventListener('pointercancel', release);
   });
 
   /* -------------------------------------------------------
@@ -303,7 +320,7 @@
           resT.textContent = fmt(Math.round(state.h)) + ' Std.';
         }
       });
-      note.innerHTML = `Das sind rund <strong>${fmt(Math.round(hours / 8))} volle Arbeitstage</strong>. Für glatte Haut, die nach drei Tagen wieder weg ist.`;
+      note.innerHTML = `Das sind rund <strong>${fmt(Math.round(hours / 8))} volle Arbeitstage</strong>. Für glatte Haut, die nach drei Tagen wieder mit Stoppeln übersät ist.`;
     };
     inM.addEventListener('input', update);
     inT.addEventListener('input', update);
