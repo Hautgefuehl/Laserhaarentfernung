@@ -67,7 +67,7 @@
     if (!pixelLoaded || !window.fbq || !d || d.choice !== 'all') return;
     const a = e.target.closest('a');
     if (!a) return;
-    if (a.href.includes('studiobookr.com')) window.fbq('track', 'Lead', { content_name: 'Termin buchen' });
+    if (a.href.includes('studiobookr.com')) window.fbq('track', 'Schedule', { content_name: 'Klick auf Online-Terminbuchung' });
     else if (a.href.includes('wa.me')) window.fbq('track', 'Contact', { content_name: 'WhatsApp' });
     else if (a.href.startsWith('tel:')) window.fbq('track', 'Contact', { content_name: 'Telefon' });
   });

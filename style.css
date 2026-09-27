@@ -1033,7 +1033,7 @@ input[type=range]::-moz-range-thumb {
   text-transform: uppercase;
   white-space: nowrap;
 }
-.ba-picker { display: grid; grid-template-columns: repeat(6, 1fr); gap: .5rem; margin-top: .9rem; }
+.ba-picker { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; margin-top: .9rem; }
 .ba-pick {
   position: relative;
   padding: 0;
