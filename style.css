@@ -1699,3 +1699,40 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
 .ba-pick { flex: 0 0 78px; scroll-snap-align: start; }
 .ba-pick img { -webkit-user-drag: none; user-select: none; }
 @media (max-width: 900px) { .ba-pick { flex-basis: 66px; } }
+
+/* =========================================================
+   HANDY: Buchungsbutton ohne Scrollen sichtbar
+   ========================================================= */
+@media (max-width: 700px) {
+  .nav { padding-block: .55rem; }
+  .hero__content { padding-top: 6rem; }
+  .hero__eyebrow { display: none; }
+  .hero__title { font-size: 2.35rem; line-height: 1.08; margin-bottom: .9rem; }
+  .hero__sub { font-size: .9rem; line-height: 1.5; margin-bottom: 1.1rem; }
+  .hero-offers { margin-bottom: .7rem; }
+  .hero-offer { padding: .55rem 1rem; }
+  .hero-offer__big { font-size: 1.8rem; }
+  .microcopy { margin-top: .7rem; }
+}
+@media (max-width: 700px) and (max-height: 620px) {
+  .hero__title { font-size: 2.1rem; }
+}
+
+/* Cookie-Banner am Handy kompakt, damit er möglichst wenig verdeckt */
+@media (max-width: 560px) {
+  .consent { left: 8px; right: 8px; bottom: 8px; padding: .85rem 1rem .7rem; border-radius: 12px; }
+  .consent__title { font-size: 1.05rem; margin-bottom: .2rem; }
+  .consent__text { font-size: .72rem; line-height: 1.45; }
+  .consent__actions { margin-top: .6rem; gap: .5rem; }
+  .consent__btn { padding: .65rem .5rem; font-size: .68rem; letter-spacing: .06em; }
+  .consent__links { margin-top: .4rem; font-size: .68rem; }
+}
+
+/* "So fühlt sich ein Leben / ohne Rasierer an" immer in genau zwei Zeilen */
+.future__title .split-word { white-space: nowrap; }
+@media (max-width: 700px) {
+  .future__title { font-size: min(2.5rem, calc((100vw - 40px) / 9.4)); }
+}
+
+/* WhatsApp-Symbol rechts neben der Nummer, Text bündig mit Anrufen/E-Mail */
+.contact__item--wa .contact__icon { order: 2; margin-left: auto; }
