@@ -1680,3 +1680,6 @@ h2.eyebrow { font-family: var(--f-body); line-height: 1.7; }
   .proof__pair { gap: .5rem; }
   .proof__tag { left: .5rem; bottom: .5rem; font-size: .62rem; padding: .35rem .6rem; letter-spacing: .04em; }
 }
+
+/* Hinweis auf Weiterleitung zur Online-Buchung */
+.microcopy--redirect { margin-top: .35rem; font-size: .72rem; }
