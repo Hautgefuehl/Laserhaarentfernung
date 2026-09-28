@@ -1788,3 +1788,10 @@ a.google-badge:hover { transform: translateY(-2px); }
   main#top > .hero, main#top > .marquee, main#top > #problem, main#top > #reframe,
   main#top > #beweis, main#top > #rechner, main#top > #preise, main#top > #rueckruf { order: 1; }
 }
+
+/* Preise ohne Streichpreis */
+.price:not(.price--cta) .price__new { margin-top: 1.4rem; }
+@media (max-width: 700px) {
+  .price:not(.price--cta) { grid-template-areas: "tag tag" "name new"; }
+  .price:not(.price--cta) .price__new { margin-top: 0 !important; }
+}

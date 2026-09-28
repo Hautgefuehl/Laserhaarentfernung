@@ -236,18 +236,6 @@
       onEnter: () => gsap.to(o, { v: end, duration: 2.2, ease: 'power3.out', onUpdate: () => { el.textContent = fmt(o.v, dec); } })
     });
   });
-  // Preise zählen vom alten auf den neuen Preis herunter
-  $$('[data-price]').forEach(el => {
-    const card = el.closest('.price');
-    const old = parseFloat($('.price__old', card).textContent);
-    const end = parseFloat(el.dataset.price);
-    const o = { v: old };
-    el.textContent = old;
-    ScrollTrigger.create({
-      trigger: card, start: 'top 85%', once: true,
-      onEnter: () => gsap.to(o, { v: end, duration: 1.8, delay: 0.4, ease: 'power3.inOut', onUpdate: () => { el.textContent = Math.round(o.v); } })
-    });
-  });
 
   /* -------------------------------------------------------
      MARQUEES (mit Scroll-Velocity)
