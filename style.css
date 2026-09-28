@@ -1770,3 +1770,21 @@ a.google-badge:hover { transform: translateY(-2px); }
   }
   .hero__photo-badge:hover { transform: translateX(-50%) translateY(-2px); }
 }
+
+/* Link "Lieber zurückrufen lassen?" unter dem Buchungsbutton */
+.hero__callback-link {
+  display: inline-flex; gap: .4rem; align-items: center; margin-top: .7rem;
+  font-size: .86rem; font-weight: 500; color: var(--gold-light);
+  text-decoration: underline; text-underline-offset: .22em; text-decoration-color: rgba(143, 104, 40, .45);
+}
+.hero__callback-link:hover { text-decoration-color: currentColor; }
+#rueckruf-formular { scroll-margin-top: 90px; }
+@media (max-width: 700px) {
+  .hero__callback-link { order: 4; margin-top: .55rem; }
+
+  /* Preise und Rückruf am Handy direkt nach dem Kostenrechner */
+  main#top { display: flex; flex-direction: column; }
+  main#top > * { order: 2; }
+  main#top > .hero, main#top > .marquee, main#top > #problem, main#top > #reframe,
+  main#top > #beweis, main#top > #rechner, main#top > #preise, main#top > #rueckruf { order: 1; }
+}

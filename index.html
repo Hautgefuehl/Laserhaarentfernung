@@ -275,7 +275,7 @@
   <link rel="preload" href="fonts/montserrat-latin-e56e84.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts/fonts.css">
 
-  <link rel="stylesheet" href="style.css?v=33">
+  <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body>
 
@@ -314,6 +314,7 @@
           </a>
           <p class="microcopy"><span>✓ Termin in 60 Sekunden online gebucht</span> · <span>✓ kostenlos &amp; unverbindlich</span> · <span>✓ kein Verkaufsgespräch</span></p>
           <p class="microcopy microcopy--redirect">Du wirst zu unserer Online-Terminbuchung weitergeleitet.</p>
+          <a href="#rueckruf-formular" class="hero__callback-link">Lieber zurückrufen lassen? <span aria-hidden="true">→</span></a>
         </div>
 
         <!-- Nur am Handy: Teamfoto direkt unter dem Button -->
@@ -784,7 +785,7 @@
           </ul>
         </div>
         <div class="callback-card glass" data-reveal>
-          <form class="callback" action="anfrage.php" method="post" novalidate>
+          <form class="callback" id="rueckruf-formular" action="anfrage.php" method="post" novalidate>
             <div class="callback__fields">
               <label class="callback__field" for="cb-name-a"><span>Dein Name</span>
                 <input id="cb-name-a" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
@@ -1020,6 +1021,6 @@
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="vendor/lenis.min.js"></script>
   <script src="consent.js?v=4"></script>
-  <script src="main.js?v=12"></script>
+  <script src="main.js?v=16"></script>
 </body>
 </html>

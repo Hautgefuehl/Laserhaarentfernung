@@ -107,9 +107,14 @@
       const target = id === '#top' ? 0 : $(id);
       if (target === null) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: -70, duration: 1.6 });
-      else if (target === 0) window.scrollTo({ top: 0, behavior: 'smooth' });
-      else target.scrollIntoView({ behavior: 'smooth' });
+      // Abstand = Höhe der festen Kopfzeile, damit nichts vom Logo verdeckt wird
+      const nav = $('.nav');
+      const gap = Math.max(nav ? nav.getBoundingClientRect().bottom : 0, 100) + 12;
+      // Position ohne Einblend-Animationen berechnen (offsetTop ignoriert transform)
+      let y = 0;
+      if (target !== 0) { for (let el = target; el; el = el.offsetParent) y += el.offsetTop; y = Math.max(0, y - gap); }
+      if (lenis) lenis.scrollTo(y, { duration: 1.6 });
+      else window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
 
