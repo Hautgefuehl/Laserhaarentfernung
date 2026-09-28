@@ -1795,3 +1795,9 @@ a.google-badge:hover { transform: translateY(-2px); }
   .price:not(.price--cta) { grid-template-areas: "tag tag" "name new"; }
   .price:not(.price--cta) .price__new { margin-top: 0 !important; }
 }
+
+/* Handy: Google-Bewertung oben auf dem Teamfoto (ohne Scrollen sichtbar) */
+@media (max-width: 700px) {
+  .hero__photo-m img { object-position: 50% 66%; }
+  .hero__photo-badge { top: 12px; bottom: auto; }
+}
