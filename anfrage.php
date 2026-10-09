@@ -34,7 +34,7 @@ function antwort(bool $ok, string $meldung, int $status = 200): never
         echo json_encode(['ok' => $ok, 'message' => $meldung], JSON_UNESCAPED_UNICODE);
     } else {
         // Ohne JavaScript: zurück zur Seite mit Ergebnis-Hinweis
-        header('Location: ./?anfrage=' . ($ok ? 'ok' : 'fehler') . '#rueckruf', true, 303);
+        header('Location: ' . ($ok ? './danke/' : './?anfrage=fehler#rueckruf'), true, 303);
     }
     exit;
 }
@@ -69,6 +69,10 @@ $name    = $bereinigen((string)($_POST['name'] ?? ''));
 $telefon = $bereinigen((string)($_POST['telefon'] ?? ''));
 $quelle  = substr($bereinigen((string)($_POST['quelle'] ?? '')), 0, 200);
 $position = substr($bereinigen((string)($_POST['position'] ?? '')), 0, 40);
+$zonen  = ['Achseln', 'Bikini / Intim', 'Beine', 'Gesicht', 'Rücken / Männer', 'Mehrere'];
+$zeiten = ['Vormittag', 'Nachmittag', 'Abend'];
+$zone = in_array((string)($_POST['zone'] ?? ''), $zonen, true) ? (string)$_POST['zone'] : '';
+$zeit = in_array((string)($_POST['zeit'] ?? ''), $zeiten, true) ? (string)$_POST['zeit'] : '';
 
 if (mb_strlen($name) < 2 || mb_strlen($name) > 80) {
     antwort(false, 'Bitte gib deinen Namen ein.', 422);
@@ -77,14 +81,19 @@ $ziffern = preg_replace('/\D+/', '', $telefon) ?? '';
 if (!preg_match('/^[0-9+()\/\s.-]{6,25}$/', $telefon) || strlen($ziffern) < 6 || strlen($ziffern) > 16) {
     antwort(false, 'Bitte gib eine gültige Handynummer ein.', 422);
 }
+if ($zone === '') {
+    antwort(false, 'Bitte wähle aus, welche Zone dich interessiert.', 422);
+}
 
 /* --- E-Mail zusammenstellen --- */
-$betreff = 'Rückruf-Anfrage Landingpage: ' . $name;
+$betreff = 'Rückruf-Anfrage Landingpage: ' . $name . ' (' . $zone . ')';
 $zeit = (new DateTimeImmutable('now', new DateTimeZone('Europe/Berlin')))->format('d.m.Y, H:i');
 $text = "Neue Rückruf-Anfrage über die Landingpage\n"
       . "==========================================\n\n"
       . "Name:          {$name}\n"
       . "Handynummer:   {$telefon}\n"
+      . "Zone:          {$zone}\n"
+      . "Erreichbar:    " . ($zeit !== '' ? $zeit : 'keine Angabe') . "\n"
       . "Eingegangen:   {$zeit} Uhr\n"
       . "Formular:      " . ($position !== '' ? $position : 'unbekannt') . "\n"
       . ($quelle !== '' ? "Herkunft/Link: {$quelle}\n" : '')

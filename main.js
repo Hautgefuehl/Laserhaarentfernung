@@ -104,7 +104,9 @@
     a.addEventListener('click', e => {
       const id = a.getAttribute('href');
       if (id === '#') return; // z. B. "Cookie-Einstellungen"
-      const target = id === '#top' ? 0 : $(id);
+      // "#formular" springt zum nächstgelegenen Formular (oben oder am Ende)
+      const near = () => { const f = $$('#formular, #formular-ende'); return f.sort((x, y) => Math.abs(x.getBoundingClientRect().top) - Math.abs(y.getBoundingClientRect().top))[0] || null; };
+      const target = id === '#top' ? 0 : id === '#formular' ? near() : $(id);
       if (target === null) return;
       e.preventDefault();
       // Abstand = Höhe der festen Kopfzeile, damit nichts vom Logo verdeckt wird
@@ -450,15 +452,17 @@
         const digits = tel.replace(/\D/g, '');
         if (name.length < 2) { show('Bitte gib deinen Namen ein.', true); form.elements.name.focus(); return; }
         if (!/^[0-9+()\/\s.-]{6,25}$/.test(tel) || digits.length < 6 || digits.length > 16) { show('Bitte gib eine gültige Handynummer ein.', true); form.elements.telefon.focus(); return; }
+        if (!form.querySelector('input[name="zone"]:checked')) { show('Bitte wähle aus, welche Zone dich interessiert.', true); form.querySelector('input[name="zone"]').focus(); return; }
 
         btn.disabled = true; btn.classList.add('is-loading'); show('Wird gesendet …');
         try {
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
           const data = await res.json().catch(() => null);
           if (data && data.ok) {
-            form.classList.add('is-sent');
-            form.innerHTML = `<div class="callback__success"><span class="callback__success-icon" aria-hidden="true">✓</span><p class="callback__success-title">Danke, ${esc(name.split(' ')[0])}!</p><p>Wir rufen dich innerhalb von 24 Stunden unter <strong>${esc(tel)}</strong> zurück.</p></div>`;
-            if (window.fbq && window.hgConsentAll && window.hgConsentAll()) window.fbq('track', 'Lead', { content_name: 'Rückruf-Formular' });
+            // Weiter zur Danke-Seite; dort wird das Meta-Ereignis "Lead" einmalig ausgelöst
+            try { sessionStorage.setItem('hg-lead', '1'); } catch (err) { /* privater Modus */ }
+            show('Danke! Einen Moment …');
+            location.href = 'danke/';
           } else {
             show(data && data.message ? esc(data.message) : FALLBACK, true);
             btn.disabled = false; btn.classList.remove('is-loading');
@@ -506,8 +510,9 @@
       const y = self.scroll();
       nav.classList.toggle('is-scrolled', y > 40);
       nav.classList.toggle('is-hidden', self.direction === 1 && y > 500);
-      const finalTop = $('#termin').getBoundingClientRect().top;
-      sticky?.classList.toggle('is-visible', y > window.innerHeight * 0.7 && finalTop > window.innerHeight * 0.6);
+      // Unten fester Button, außer wenn gerade ein Formular im Bild ist
+      const formInView = $$('#formular, #formular-ende').some(f => { const r = f.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; });
+      sticky?.classList.toggle('is-visible', y > window.innerHeight * 0.5 && !formInView);
     }
   });
 

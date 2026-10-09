@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dauerhafte Laserhaarentfernung in Emmelshausen | Hautgefühl</title>
-  <meta name="description" content="Dauerhafte Laserhaarentfernung in Emmelshausen mit dem MeDioStar®. Team mit NiSV-Fachkunde, 5,0 ★ bei Google. Jetzt kostenlose Erstberatung buchen.">
+  <meta name="description" content="Dauerhafte Laserhaarentfernung in Emmelshausen mit dem MeDioStar®. Team mit NiSV-Fachkunde, 5,0 ★ bei Google. Jetzt kostenlose Erstberatung anfragen.">
   <!-- Anzeigen-Landingpage: bewusst NICHT in der Google-Suche (die Startseite übernimmt SEO). Rückgängig: "index, follow, max-image-preview:large" -->
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://hautgefuehl-emmelshausen.de/landingpage/">
@@ -239,7 +239,7 @@
             "name": "Kann ich direkt online buchen?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Ja, das ist der einfachste Weg: Wunschtermin online wählen, ohne Wartezeit am Telefon. Alternativ erreichst du uns per WhatsApp, Telefon oder Mail."
+              "text": "Trag dich einfach ein, wir rufen dich an und finden gemeinsam den passenden Termin. Alternativ erreichst du uns per WhatsApp, Telefon oder Mail."
             }
           },
           {
@@ -275,13 +275,13 @@
   <link rel="preload" href="fonts/montserrat-latin-e56e84.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts/fonts.css">
 
-  <link rel="stylesheet" href="style.css?v=38">
+  <link rel="stylesheet" href="style.css?v=41">
 </head>
 <body>
 
   <!-- ============ CURSOR ============ -->
   <div class="cursor" aria-hidden="true">
-    <div class="cursor__ring"><span class="cursor__label">Buchen</span></div>
+    <div class="cursor__ring"><span class="cursor__label">Anfragen</span></div>
     <div class="cursor__dot"></div>
   </div>
 
@@ -305,13 +305,12 @@
         <p class="hero__sub">Mit dem medizinischen Diodenlaser MeDioStar®, individuell auf deine Haut abgestimmt. Durchgeführt von unserem Team mit NiSV-Fachkunde.</p>
 
         <div class="hero__ctas">
-          <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="btn btn--gold btn--lg" data-magnetic data-cursor="book">
+          <a href="#formular" class="btn btn--gold btn--lg" data-magnetic data-cursor="book">
             <span class="btn__text">Kostenlose Erstberatung sichern</span>
             <span class="btn__icon" aria-hidden="true">→</span>
           </a>
-          <p class="microcopy"><span>✓ Termin in 60 Sekunden online gebucht</span> · <span>✓ Persönliche Beratung, für dich kostenfrei</span> · <span>✓ Termin exklusiv für dich reserviert</span></p>
-          <p class="microcopy microcopy--redirect">Du wirst zu unserer Online-Terminbuchung weitergeleitet.</p>
-          <a href="#rueckruf-formular" class="hero__callback-link">Lieber zurückrufen lassen? <span aria-hidden="true">→</span></a>
+          <p class="microcopy"><span>✓ Rückruf innerhalb von 24 Stunden</span> · <span>✓ Persönliche Beratung, für dich kostenfrei</span> · <span>✓ Termin exklusiv für dich reserviert</span></p>
+          <a href="#formular" class="hero__callback-link">Oder erst testen: Probebehandlung mit Testschuss für nur 10&nbsp;€ <span aria-hidden="true">→</span></a>
         </div>
 
         <!-- Nur am Handy: Teamfoto direkt unter dem Button -->
@@ -338,6 +337,49 @@
       <div class="hero__image">
         <img src="img/team-1600.webp" srcset="img/team-800.webp 800w, img/team-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Das Hautgefühl-Team: Nadine, Jelena und Lara" fetchpriority="high" width="1067" height="1600">
         <div class="hero__image-fade" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ RÜCKRUF (Formular) ============ -->
+    <section class="callback-section section" id="rueckruf">
+      <div class="container callback-section__grid">
+        <div class="callback-section__text">
+          <p class="eyebrow" data-reveal>Kostenlose Erstberatung</p>
+          <h2 class="display" data-split="lines">Wir rufen<br><em>dich an.</em></h2>
+          <p data-reveal>Trag dich in 30 Sekunden ein. Wir rufen dich innerhalb von 24 Stunden an, beantworten alle deine Fragen und vereinbaren den Termin gemeinsam im Gespräch.</p>
+          <ul class="checklist">
+            <li data-reveal><span>✓</span>Rückruf kostenlos &amp; unverbindlich</li>
+            <li data-reveal><span>✓</span>Rückruf innerhalb von 24 Stunden</li>
+            <li data-reveal><span>✓</span>Kein Verkaufsgespräch</li>
+          </ul>
+          <p class="callback-section__trial" data-reveal><strong>Oder erst testen:</strong> Probebehandlung mit Testschuss an einer Stelle deiner Wahl für nur 10&nbsp;€.</p>
+        </div>
+        <div class="callback-card glass" data-reveal>
+          <form class="callback" id="formular" action="anfrage.php" method="post" novalidate>
+            <div class="callback__fields">
+              <label class="callback__field" for="cb-name-a"><span>Dein Name</span>
+                <input id="cb-name-a" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
+              <label class="callback__field" for="cb-tel-a"><span>Deine Handynummer</span>
+                <input id="cb-tel-a" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="z. B. 0151 23456789"></label>
+            </div>
+            <fieldset class="callback__choice">
+              <legend>Welche Zone interessiert dich?</legend>
+              <div class="chips"><label class="chip"><input type="radio" name="zone" value="Achseln"><span>Achseln</span></label><label class="chip"><input type="radio" name="zone" value="Bikini / Intim"><span>Bikini / Intim</span></label><label class="chip"><input type="radio" name="zone" value="Beine"><span>Beine</span></label><label class="chip"><input type="radio" name="zone" value="Gesicht"><span>Gesicht</span></label><label class="chip"><input type="radio" name="zone" value="Rücken / Männer"><span>Rücken / Männer</span></label><label class="chip"><input type="radio" name="zone" value="Mehrere"><span>Mehrere</span></label></div>
+            </fieldset>
+            <fieldset class="callback__choice">
+              <legend>Wann erreichen wir dich am besten? <small>optional</small></legend>
+              <div class="chips"><label class="chip"><input type="radio" name="zeit" value="Vormittag"><span>Vormittag</span></label><label class="chip"><input type="radio" name="zeit" value="Nachmittag"><span>Nachmittag</span></label><label class="chip"><input type="radio" name="zeit" value="Abend"><span>Abend</span></label></div>
+            </fieldset>
+            <p class="callback__privacy">Wir nutzen deine Angaben nur, um dich zur Terminvereinbarung zurückzurufen. Mehr dazu in der <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+            <div class="callback__hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <input type="hidden" name="t" value="">
+            <input type="hidden" name="quelle" value="">
+            <input type="hidden" name="position" value="Direkt nach dem Start">
+            <button type="submit" class="btn btn--gold btn--lg callback__submit"><span class="btn__text">Rückruf anfordern</span><span class="btn__icon" aria-hidden="true">→</span></button>
+            <p class="callback__note">Wir rufen dich innerhalb von 24 Stunden an. Kostenlos und unverbindlich. Den Termin vereinbaren wir erst gemeinsam im Gespräch.</p>
+            <p class="callback__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -459,7 +501,7 @@
             </div>
           </div>
           <p class="calc__note" id="res-note">Das sind rund <strong>65 volle Arbeitstage</strong>. Für glatte Haut, die nach drei Tagen wieder mit Stoppeln übersät ist.</p>
-          <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="btn btn--gold" data-magnetic data-cursor="book">
+          <a href="#formular" class="btn btn--gold" data-magnetic data-cursor="book">
             <span class="btn__text">Meine Zeit zurückholen</span><span class="btn__icon" aria-hidden="true">→</span>
           </a>
         </div>
@@ -629,9 +671,9 @@
           </article>
         </div>
         <div class="steps__cta container" data-reveal>
-          <p>Die Buchung dauert nur <strong>60 Sekunden</strong>.</p>
-          <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="btn btn--gold" data-magnetic data-cursor="book">
-            <span class="btn__text">Jetzt kostenlose Beratung buchen</span><span class="btn__icon" aria-hidden="true">→</span>
+          <p>Die Anfrage dauert nur <strong>30 Sekunden</strong>.</p>
+          <a href="#formular" class="btn btn--gold" data-magnetic data-cursor="book">
+            <span class="btn__text">Jetzt kostenlose Beratung anfragen</span><span class="btn__icon" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -644,7 +686,7 @@
           <p class="eyebrow" data-reveal>Echte Ergebnisse: Vorher und Nachher</p>
           <h2 class="display" data-split="lines">Sieh selbst,<br><em>was bleibt.</em></h2>
           <p data-reveal>Echte Kunden, echte Fotos aus unserem Studio, keine Filter. Wähle eine Zone und zieh den Regler.</p>
-          <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="btn btn--ghost" data-magnetic data-cursor="book" data-reveal>
+          <a href="#formular" class="btn btn--ghost" data-magnetic data-cursor="book" data-reveal>
             <span class="btn__text">Das will ich auch</span><span class="btn__icon" aria-hidden="true">→</span>
           </a>
         </div>
@@ -740,7 +782,7 @@
             <h3>Probebehandlung <small>Testschuss an einer Stelle deiner Wahl</small></h3>
             <p class="price__new">10 €</p>
             <p>Spür selbst, wie sanft der MeDioStar® ist. Dann entscheidest du in Ruhe.</p>
-            <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="btn btn--gold btn--small" data-magnetic data-cursor="book"><span class="btn__text">Kostenlose Beratung</span></a>
+            <a href="#formular" class="btn btn--gold btn--small" data-magnetic data-cursor="book"><span class="btn__text">Kostenlose Beratung</span></a>
           </article>
         </div>
 
@@ -762,40 +804,6 @@
       </div>
     </section>
 
-
-    <!-- ============ RÜCKRUF (Formular) ============ -->
-    <section class="callback-section section" id="rueckruf">
-      <div class="container callback-section__grid">
-        <div class="callback-section__text">
-          <p class="eyebrow" data-reveal>Lieber persönlich sprechen?</p>
-          <h2 class="display" data-split="lines">Wir rufen<br><em>dich zurück.</em></h2>
-          <p data-reveal>Du hast noch Fragen, bevor du buchst? Hinterlass einfach deinen Namen und deine Handynummer. Wir melden uns innerhalb von 24 Stunden, beantworten alles in Ruhe und finden gemeinsam einen Termin.</p>
-          <ul class="checklist">
-            <li data-reveal><span>✓</span>Rückruf kostenlos &amp; unverbindlich</li>
-            <li data-reveal><span>✓</span>Rückruf innerhalb von 24 Stunden</li>
-            <li data-reveal><span>✓</span>Kein Verkaufsgespräch</li>
-          </ul>
-        </div>
-        <div class="callback-card glass" data-reveal>
-          <form class="callback" id="rueckruf-formular" action="anfrage.php" method="post" novalidate>
-            <div class="callback__fields">
-              <label class="callback__field" for="cb-name-a"><span>Dein Name</span>
-                <input id="cb-name-a" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
-              <label class="callback__field" for="cb-tel-a"><span>Deine Handynummer</span>
-                <input id="cb-tel-a" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="z. B. 0151 23456789"></label>
-            </div>
-            <p class="callback__privacy">Wir nutzen deine Angaben nur, um dich zur Terminvereinbarung zurückzurufen. Mehr dazu in der <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
-            <div class="callback__hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-            <input type="hidden" name="t" value="">
-            <input type="hidden" name="quelle" value="">
-            <input type="hidden" name="position" value="Abschnitt nach den Preisen">
-            <button type="submit" class="btn btn--gold btn--lg callback__submit"><span class="btn__text">Rückruf anfordern</span><span class="btn__icon" aria-hidden="true">→</span></button>
-            <p class="callback__note">Wir melden uns innerhalb von 24 Stunden. Der Rückruf ist kostenlos und unverbindlich, einen Termin vereinbaren wir erst gemeinsam.</p>
-            <p class="callback__status" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </section>
 
     <!-- ============ STUDIO (Wohlfühlen & Hygiene sichtbar machen) ============ -->
     <section class="studio section" id="studio">
@@ -917,7 +925,7 @@
           </details>
           <details class="faq__item" data-reveal>
             <summary>Kann ich direkt online buchen?<i></i></summary>
-            <div class="faq__body"><p>Ja, das ist der einfachste Weg: Wunschtermin online wählen, ohne Wartezeit am Telefon. Alternativ erreichst du uns per <a href="https://wa.me/4915906199525" target="_blank" rel="noopener">WhatsApp</a>, <a href="tel:+4915906199525">Telefon</a> oder <a href="mailto:info@hautgefuehl-emmelshausen.de">Mail</a>.</p></div>
+            <div class="faq__body"><p><a href="#formular">Trag dich einfach ein</a>, wir rufen dich an und finden gemeinsam den passenden Termin. Alternativ erreichst du uns per <a href="https://wa.me/4915906199525" target="_blank" rel="noopener">WhatsApp</a>, <a href="tel:+4915906199525">Telefon</a> oder <a href="mailto:info@hautgefuehl-emmelshausen.de">Mail</a>.</p></div>
           </details>
           <details class="faq__item" data-reveal>
             <summary>Wo finde ich euch?<i></i></summary>
@@ -939,10 +947,10 @@
         <h2 class="final__title" data-split="chars">Dein Moment.</h2>
         <p class="final__sub" data-reveal>Wir schauen uns gemeinsam an, was du dir wünschst, und zeigen dir, wie wir das umsetzen. Kein Druck. Keine versteckten Kosten.<br>Und wenn du erst testen willst: Testschuss an einer Stelle deiner Wahl für nur 10 €.</p>
 
-        <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="orb-btn" data-magnetic data-strength="0.5" data-cursor="book" aria-label="Kostenlose Erstberatung online buchen">
+        <a href="#formular" class="orb-btn" data-magnetic data-strength="0.5" data-cursor="book" aria-label="Kostenlose Erstberatung online buchen">
           <svg class="orb-btn__ring" viewBox="0 0 200 200" aria-hidden="true">
             <defs><path id="orb-path" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
-            <text><textPath href="#orb-path">Kostenlose Erstberatung · Online buchen · </textPath></text>
+            <text><textPath href="#orb-path">Kostenlose Erstberatung · Rückruf anfordern · </textPath></text>
           </svg>
           <span class="orb-btn__core">Beratung<br>sichern</span>
         </a>
@@ -953,21 +961,29 @@
           <a href="mailto:info@hautgefuehl-emmelshausen.de" class="contact__item glass" data-magnetic data-strength="0.2"><small>E-Mail</small>info@hautgefuehl-emmelshausen.de</a>
         </div>
         <div class="final__callback glass" data-reveal>
-          <p class="final__callback-title">Oder lieber zurückrufen lassen?</p>
-          <form class="callback" action="anfrage.php" method="post" novalidate>
+          <p class="final__callback-title">Kostenlose Beratung anfragen</p>
+          <form class="callback" id="formular-ende" action="anfrage.php" method="post" novalidate>
             <div class="callback__fields">
               <label class="callback__field" for="cb-name-b"><span>Dein Name</span>
                 <input id="cb-name-b" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Vor- und Nachname"></label>
               <label class="callback__field" for="cb-tel-b"><span>Deine Handynummer</span>
                 <input id="cb-tel-b" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="25" placeholder="z. B. 0151 23456789"></label>
             </div>
+            <fieldset class="callback__choice">
+              <legend>Welche Zone interessiert dich?</legend>
+              <div class="chips"><label class="chip"><input type="radio" name="zone" value="Achseln"><span>Achseln</span></label><label class="chip"><input type="radio" name="zone" value="Bikini / Intim"><span>Bikini / Intim</span></label><label class="chip"><input type="radio" name="zone" value="Beine"><span>Beine</span></label><label class="chip"><input type="radio" name="zone" value="Gesicht"><span>Gesicht</span></label><label class="chip"><input type="radio" name="zone" value="Rücken / Männer"><span>Rücken / Männer</span></label><label class="chip"><input type="radio" name="zone" value="Mehrere"><span>Mehrere</span></label></div>
+            </fieldset>
+            <fieldset class="callback__choice">
+              <legend>Wann erreichen wir dich am besten? <small>optional</small></legend>
+              <div class="chips"><label class="chip"><input type="radio" name="zeit" value="Vormittag"><span>Vormittag</span></label><label class="chip"><input type="radio" name="zeit" value="Nachmittag"><span>Nachmittag</span></label><label class="chip"><input type="radio" name="zeit" value="Abend"><span>Abend</span></label></div>
+            </fieldset>
             <p class="callback__privacy">Wir nutzen deine Angaben nur, um dich zur Terminvereinbarung zurückzurufen. Mehr dazu in der <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
             <div class="callback__hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <input type="hidden" name="t" value="">
             <input type="hidden" name="quelle" value="">
             <input type="hidden" name="position" value="Abschlussbereich">
             <button type="submit" class="btn btn--gold btn--lg callback__submit"><span class="btn__text">Rückruf anfordern</span><span class="btn__icon" aria-hidden="true">→</span></button>
-            <p class="callback__note">Wir melden uns innerhalb von 24 Stunden. Der Rückruf ist kostenlos und unverbindlich, einen Termin vereinbaren wir erst gemeinsam.</p>
+            <p class="callback__note">Wir rufen dich innerhalb von 24 Stunden an. Kostenlos und unverbindlich. Den Termin vereinbaren wir erst gemeinsam im Gespräch.</p>
             <p class="callback__status" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -993,8 +1009,8 @@
   </div>
 
   <!-- Mobiler Sticky-CTA -->
-  <a href="https://www.studiobookr.com/hautgefuehl-dauerhafte-haarentfernung-60715?src=meta" target="_blank" rel="noopener" class="sticky-cta" id="sticky-cta">
-    <span>Kostenlose Erstberatung</span><strong>Jetzt buchen →</strong>
+  <a href="#formular" class="sticky-cta sticky-cta--single" id="sticky-cta">
+    <strong>Kostenlose Beratung anfragen →</strong>
   </a>
 
   <!-- Einwilligung (Cookie-Banner) -->
@@ -1012,7 +1028,7 @@
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="vendor/lenis.min.js"></script>
-  <script src="consent.js?v=4"></script>
-  <script src="main.js?v=17"></script>
+  <script src="consent.js?v=5"></script>
+  <script src="main.js?v=18"></script>
 </body>
 </html>

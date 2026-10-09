@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danke für deine Anfrage | Hautgefühl Emmelshausen</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" sizes="48x48" href="../img/favicon-48.png">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <link rel="stylesheet" href="../style.css?v=41">
+  <style>
+    .thanks { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2.5rem var(--pad, 20px) 3rem; }
+    .thanks__logo { width: 200px; height: auto; margin-bottom: 2.2rem; }
+    .thanks__icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 1.4rem; border-radius: 50%; background: #9E7430; color: #fff; font-size: 1.8rem; box-shadow: 0 14px 30px -12px rgba(120, 88, 40, .6); }
+    .thanks h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1.05; margin-bottom: 1rem; }
+    .thanks h1 em { color: #8F6828; }
+    .thanks__lead { font-size: 1.1rem; max-width: 460px; margin: 0 auto 1.6rem; color: var(--text); }
+    .thanks__small { font-size: .92rem; max-width: 460px; margin: 0 auto; color: var(--text-dim); }
+    .thanks__small a, .thanks__back { color: #8F6828; text-decoration: underline; text-underline-offset: .2em; }
+    .thanks__back { display: inline-block; margin-top: 2rem; font-size: .9rem; }
+    .thanks__legal { margin-top: 2.6rem; font-size: .78rem; color: var(--text-faint); }
+    .thanks__legal a { color: inherit; text-decoration: underline; margin: 0 .4rem; }
+  </style>
+</head>
+<body>
+  <main class="thanks">
+    <img src="../img/logo-480.png" alt="Hautgefühl, Dauerhafte Haarentfernung" class="thanks__logo" width="480" height="262">
+    <span class="thanks__icon" aria-hidden="true">✓</span>
+    <h1>Danke!<br><em>Deine Anfrage ist da.</em></h1>
+    <p class="thanks__lead">Wir melden uns heute bzw. am nächsten Werktag bei dir.</p>
+    <p class="thanks__small">Du möchtest nicht warten? Schreib uns auf <a href="https://wa.me/4915906199525" target="_blank" rel="noopener">WhatsApp</a> oder ruf uns an: <a href="tel:+4915906199525">0159 06199525</a>.</p>
+    <a href="../" class="thanks__back">Zurück zur Seite</a>
+    <p class="thanks__legal"><a href="https://hautgefuehl-emmelshausen.de/impressum-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Impressum</a> · <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutz</a> · <a href="#" data-consent-open>Cookie-Einstellungen</a></p>
+  </main>
+
+  <div class="consent" id="consent" role="dialog" aria-live="polite" aria-label="Cookie-Einstellungen" hidden>
+    <p class="consent__title">Deine Privatsphäre</p>
+    <p class="consent__text">Wir möchten mit dem Meta-Pixel messen, wie gut unsere Werbung funktioniert. Das passiert nur mit deiner Einwilligung. Du kannst sie jederzeit im Footer unter „Cookie-Einstellungen" ändern. Mehr dazu in unserer <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+    <div class="consent__actions">
+      <button type="button" class="consent__btn" data-consent="necessary">Nur notwendige</button>
+      <button type="button" class="consent__btn" data-consent="all">Alle akzeptieren</button>
+    </div>
+    <p class="consent__links"><a href="https://hautgefuehl-emmelshausen.de/impressum-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Impressum</a> · <a href="https://hautgefuehl-emmelshausen.de/datenschutz-hautgefuehl-studio-emmelshausen/" target="_blank" rel="noopener">Datenschutz</a></p>
+  </div>
+
+  <script src="../consent.js?v=5"></script>
+  <script>
+    /* Meta-Ereignis "Lead": nur nach einer echten Anfrage (nicht beim Neuladen)
+       und nur mit Einwilligung in Marketing-Cookies */
+    (function () {
+      var pending = false;
+      try { pending = sessionStorage.getItem('hg-lead') === '1'; } catch (e) {}
+      if (!pending) return;
+      var fire = function () {
+        if (!window.fbq || !window.hgConsentAll || !window.hgConsentAll()) return;
+        window.fbq('track', 'Lead', { content_name: 'Rückruf-Anfrage' });
+        try { sessionStorage.removeItem('hg-lead'); } catch (e) {}
+        window.removeEventListener('hg:pixel', fire);
+      };
+      fire();
+      window.addEventListener('hg:pixel', fire);
+    })();
+  </script>
+</body>
+</html>

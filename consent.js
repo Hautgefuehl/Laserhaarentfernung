@@ -14,6 +14,8 @@
   const KEY = 'hg-consent';
   const GUELTIG_MS = 365 * 24 * 60 * 60 * 1000;   // 12 Monate
   const BANNER_VERSION = '2026-09';                 // bei neuem Banner-Text erhöhen => alle werden neu gefragt
+  // Protokoll-Adresse relativ zu dieser Datei (funktioniert auch auf der Danke-Seite im Unterordner)
+  const LOG_URL = new URL('consent-log.php', document.currentScript ? document.currentScript.src : location.href).href;
   const banner = document.getElementById('consent');
   if (!banner) return;
 
@@ -32,8 +34,8 @@
   const protokoll = rec => {
     try {
       const body = new URLSearchParams({ id: rec.id, choice: rec.choice, v: rec.v });
-      if (navigator.sendBeacon) navigator.sendBeacon('consent-log.php', body);
-      else fetch('consent-log.php', { method: 'POST', body, keepalive: true }).catch(() => {});
+      if (navigator.sendBeacon) navigator.sendBeacon(LOG_URL, body);
+      else fetch(LOG_URL, { method: 'POST', body, keepalive: true }).catch(() => {});
     } catch (e) { /* Protokoll darf die Seite nie stören */ }
   };
 
@@ -57,6 +59,7 @@
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('init', META_PIXEL_ID);
     window.fbq('track', 'PageView');
+    window.dispatchEvent(new Event('hg:pixel'));
   }
   // Widerruf während des Besuchs: Pixel sofort stummschalten
   const revokePixel = () => { if (pixelLoaded && window.fbq) window.fbq('consent', 'revoke'); };
@@ -67,8 +70,7 @@
     if (!pixelLoaded || !window.fbq || !d || d.choice !== 'all') return;
     const a = e.target.closest('a');
     if (!a) return;
-    if (a.href.includes('studiobookr.com')) window.fbq('track', 'Schedule', { content_name: 'Klick auf Online-Terminbuchung' });
-    else if (a.href.includes('wa.me')) window.fbq('track', 'Contact', { content_name: 'WhatsApp' });
+    if (a.href.includes('wa.me')) window.fbq('track', 'Contact', { content_name: 'WhatsApp' });
     else if (a.href.startsWith('tel:')) window.fbq('track', 'Contact', { content_name: 'Telefon' });
   });
 

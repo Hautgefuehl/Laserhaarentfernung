@@ -1816,3 +1816,50 @@ a.google-badge:hover { transform: translateY(-2px); }
 }
 
 .nowrap { white-space: nowrap; }
+
+/* =========================================================
+   FORMULAR: Auswahl zum Antippen (Zone, Erreichbarkeit)
+   ========================================================= */
+.callback__choice { border: 0; padding: 0; margin: 1.1rem 0 0; min-width: 0; }
+.callback__choice legend { display: block; padding: 0; margin-bottom: .55rem; font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+.callback__choice legend small { font-weight: 500; letter-spacing: .06em; text-transform: none; color: var(--text-faint); font-size: .72rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.chip { position: relative; cursor: pointer; }
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip span {
+  display: inline-block; padding: .55rem .9rem; border-radius: 999px; font-size: .86rem; line-height: 1.2;
+  background: #fff; color: var(--text); border: 1px solid rgba(158, 116, 48, .45);
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+.chip:hover span { border-color: var(--gold); }
+.chip input:checked + span { background: #9E7430; border-color: #9E7430; color: #fff; }
+.chip input:focus-visible + span { box-shadow: 0 0 0 3px rgba(196, 154, 74, .35); }
+.callback__choice + .callback__privacy { margin-top: 1.1rem; }
+
+/* Hinweis auf die Probebehandlung am Formular */
+.callback-section__trial { margin-top: 1.2rem; padding: .9rem 1.1rem; border-radius: 12px; background: rgba(158, 206, 192, .18); border: 1px solid rgba(107, 186, 170, .45); font-size: .92rem; color: var(--text); }
+
+/* Fester Button unten (Handy): nur ein Text */
+.sticky-cta--single { justify-content: center; text-align: center; }
+
+/* Probebehandlungs-Link im Hero: Pfeil direkt hinter dem Text */
+.hero__callback-link { display: block; max-width: 30rem; }
+
+/* Handy: Formular direkt unter dem Einleitungstext, Häkchen und Probebehandlung darunter */
+@media (max-width: 900px) {
+  .callback-section__grid { display: flex; flex-direction: column; }
+  .callback-section__text { display: contents; }
+  .callback-section__text > .eyebrow { order: 1; }
+  .callback-section__text > h2 { order: 2; }
+  .callback-section__text > p:not(.eyebrow):not(.callback-section__trial) { order: 3; }
+  .callback-section .callback-card { order: 4; margin-top: .6rem; }
+  .callback-section__trial { order: 5; }
+  .callback-section .checklist { order: 6; margin-top: 1rem; }
+}
+@media (max-width: 900px) {
+  .callback-section__grid { align-items: stretch; gap: 0; text-align: left; }
+  .callback-section__text > h2 { align-self: flex-start; margin-bottom: 1rem; }
+  .callback-section__text > .eyebrow { align-self: flex-start; }
+  .callback-section .callback-card { margin-top: 1.4rem; }
+  .callback-section__trial { margin-top: 1.2rem; }
+}
