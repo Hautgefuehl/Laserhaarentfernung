@@ -69,7 +69,7 @@ $name    = $bereinigen((string)($_POST['name'] ?? ''));
 $telefon = $bereinigen((string)($_POST['telefon'] ?? ''));
 $quelle  = substr($bereinigen((string)($_POST['quelle'] ?? '')), 0, 200);
 $position = substr($bereinigen((string)($_POST['position'] ?? '')), 0, 40);
-$zonen  = ['Achseln', 'Bikini / Intim', 'Beine', 'Gesicht', 'Rücken / Männer'];
+$zonen  = ['Achseln', 'Bikinizone', 'Intim komplett', 'Beine', 'Gesicht', 'Arme', 'Rücken / Schultern', 'Brust / Bauch', 'Po / Pofalte', 'Hals / Nacken', 'Bart / Wangen', 'Andere'];
 $zeiten = ['Vormittag', 'Nachmittag', 'Abend'];
 // Mehrfachauswahl: nur bekannte Zonen übernehmen, in fester Reihenfolge
 $gewaehlt = (array)($_POST['zone'] ?? []);
