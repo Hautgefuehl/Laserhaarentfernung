@@ -16,3 +16,14 @@
 <IfModule mod_alias.c>
   RedirectMatch 404 /consent-log(/|$)
 </IfModule>
+
+# Conversions API: Zugangsdaten und Hilfsdatei niemals direkt ausliefern
+<FilesMatch "^(capi|capi-config)\.php$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

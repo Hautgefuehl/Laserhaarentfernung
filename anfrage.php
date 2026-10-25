@@ -89,14 +89,14 @@ if ($zone === '') {
 
 /* --- E-Mail zusammenstellen --- */
 $betreff = 'Rückruf-Anfrage Landingpage: ' . $name . ' (' . $zone . ')';
-$zeit = (new DateTimeImmutable('now', new DateTimeZone('Europe/Berlin')))->format('d.m.Y, H:i');
+$eingang = (new DateTimeImmutable('now', new DateTimeZone('Europe/Berlin')))->format('d.m.Y, H:i');
 $text = "Neue Rückruf-Anfrage über die Landingpage\n"
       . "==========================================\n\n"
       . "Name:          {$name}\n"
       . "Handynummer:   {$telefon}\n"
       . "Zone:          {$zone}\n"
       . "Erreichbar:    " . ($zeit !== '' ? $zeit : 'keine Angabe') . "\n"
-      . "Eingegangen:   {$zeit} Uhr\n"
+      . "Eingegangen:   {$eingang} Uhr\n"
       . "Formular:      " . ($position !== '' ? $position : 'unbekannt') . "\n"
       . ($quelle !== '' ? "Herkunft/Link: {$quelle}\n" : '')
       . "\nDie Person bittet um einen Rückruf zur Terminvereinbarung.\n";
@@ -122,4 +122,13 @@ if (!$gesendet) {
 }
 
 @file_put_contents($zaehlerDatei, (string)($anzahl + 1));
+
+/* --- Meta Conversions API: Lead zusätzlich serverseitig melden (nur mit Marketing-Einwilligung) --- */
+try {
+    require_once __DIR__ . '/capi.php';
+    hg_capi_lead($name, $telefon);
+} catch (Throwable $e) {
+    error_log('Meta CAPI: ' . $e->getMessage()); // darf die Anfrage nie stören
+}
+
 antwort(true, 'Danke! Wir rufen dich innerhalb von 24 Stunden zurück.');

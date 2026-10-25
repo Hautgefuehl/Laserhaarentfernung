@@ -456,11 +456,17 @@
 
         btn.disabled = true; btn.classList.add('is-loading'); show('Wird gesendet …');
         try {
-          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          // Eindeutige ID pro Anfrage: dieselbe ID geht an den Server (Conversions API) und an das Pixel auf der Danke-Seite
+          const eventId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+            : 'lead-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
+          const fd = new FormData(form);
+          fd.set('event_id', eventId);
+          fd.set('consent', (window.hgConsentAll && window.hgConsentAll()) ? 'all' : 'none');
+          const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
           const data = await res.json().catch(() => null);
           if (data && data.ok) {
             // Weiter zur Danke-Seite; dort wird das Meta-Ereignis "Lead" einmalig ausgelöst
-            try { sessionStorage.setItem('hg-lead', '1'); } catch (err) { /* privater Modus */ }
+            try { sessionStorage.setItem('hg-lead', eventId); } catch (err) { /* privater Modus */ }
             show('Danke! Einen Moment …');
             location.href = 'danke/';
           } else {

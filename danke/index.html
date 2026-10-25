@@ -55,12 +55,14 @@
     /* Meta-Ereignis "Lead": nur nach einer echten Anfrage (nicht beim Neuladen)
        und nur mit Einwilligung in Marketing-Cookies */
     (function () {
-      var pending = false;
-      try { pending = sessionStorage.getItem('hg-lead') === '1'; } catch (e) {}
-      if (!pending) return;
+      var leadId = null;
+      try { leadId = sessionStorage.getItem('hg-lead'); } catch (e) {}
+      if (!leadId) return;
       var fire = function () {
         if (!window.fbq || !window.hgConsentAll || !window.hgConsentAll()) return;
-        window.fbq('track', 'Lead', { content_name: 'Rückruf-Anfrage' });
+        // Gleiche event_id wie beim Server-Event, damit Meta die Anfrage nur einmal zählt
+        if (leadId !== '1') window.fbq('track', 'Lead', { content_name: 'Rückruf-Anfrage' }, { eventID: leadId });
+        else window.fbq('track', 'Lead', { content_name: 'Rückruf-Anfrage' });
         try { sessionStorage.removeItem('hg-lead'); } catch (e) {}
         window.removeEventListener('hg:pixel', fire);
       };
