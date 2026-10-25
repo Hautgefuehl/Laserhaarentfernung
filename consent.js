@@ -62,7 +62,17 @@
     window.dispatchEvent(new Event('hg:pixel'));
   }
   // Widerruf während des Besuchs: Pixel sofort stummschalten
-  const revokePixel = () => { if (pixelLoaded && window.fbq) window.fbq('consent', 'revoke'); };
+  // Widerruf: Pixel stummschalten und seine Spuren im Browser löschen (_fbp/_fbc, Meta-Einträge im Speicher)
+  const clearMetaTraces = () => {
+    ['_fbp', '_fbc'].forEach(n => {
+      [location.hostname, '.' + location.hostname.replace(/^www\./, '')].forEach(dom => {
+        document.cookie = n + '=; Max-Age=0; path=/; domain=' + dom;
+      });
+      document.cookie = n + '=; Max-Age=0; path=/';
+    });
+    try { ['lastExternalReferrer', 'lastExternalReferrerTime'].forEach(k => localStorage.removeItem(k)); } catch (e) { /* privater Modus */ }
+  };
+  const revokePixel = () => { if (pixelLoaded && window.fbq) window.fbq('consent', 'revoke'); clearMetaTraces(); };
 
   // Klicks messen (nur wenn das Pixel geladen ist und die Einwilligung gilt)
   document.addEventListener('click', e => {
@@ -88,5 +98,6 @@
 
   const d = read();
   if (d && d.choice === 'all') loadPixel();
+  else if (d && d.choice === 'necessary') { clearMetaTraces(); }
   else if (!d) setTimeout(show, 1200);
 })();
