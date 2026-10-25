@@ -452,7 +452,7 @@
         const digits = tel.replace(/\D/g, '');
         if (name.length < 2) { show('Bitte gib deinen Namen ein.', true); form.elements.name.focus(); return; }
         if (!/^[0-9+()\/\s.-]{6,25}$/.test(tel) || digits.length < 6 || digits.length > 16) { show('Bitte gib eine gültige Handynummer ein.', true); form.elements.telefon.focus(); return; }
-        if (!form.querySelector('input[name="zone"]:checked')) { show('Bitte wähle aus, welche Zone dich interessiert.', true); form.querySelector('input[name="zone"]').focus(); return; }
+        if (!form.querySelector('input[name="zone[]"]:checked')) { show('Bitte wähle mindestens eine Zone aus.', true); form.querySelector('input[name="zone[]"]').focus(); return; }
 
         btn.disabled = true; btn.classList.add('is-loading'); show('Wird gesendet …');
         try {

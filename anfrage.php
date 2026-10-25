@@ -69,9 +69,11 @@ $name    = $bereinigen((string)($_POST['name'] ?? ''));
 $telefon = $bereinigen((string)($_POST['telefon'] ?? ''));
 $quelle  = substr($bereinigen((string)($_POST['quelle'] ?? '')), 0, 200);
 $position = substr($bereinigen((string)($_POST['position'] ?? '')), 0, 40);
-$zonen  = ['Achseln', 'Bikini / Intim', 'Beine', 'Gesicht', 'Rücken / Männer', 'Mehrere'];
+$zonen  = ['Achseln', 'Bikini / Intim', 'Beine', 'Gesicht', 'Rücken / Männer'];
 $zeiten = ['Vormittag', 'Nachmittag', 'Abend'];
-$zone = in_array((string)($_POST['zone'] ?? ''), $zonen, true) ? (string)$_POST['zone'] : '';
+// Mehrfachauswahl: nur bekannte Zonen übernehmen, in fester Reihenfolge
+$gewaehlt = (array)($_POST['zone'] ?? []);
+$zone = implode(', ', array_values(array_filter($zonen, static fn(string $z): bool => in_array($z, $gewaehlt, true))));
 $zeit = in_array((string)($_POST['zeit'] ?? ''), $zeiten, true) ? (string)$_POST['zeit'] : '';
 
 if (mb_strlen($name) < 2 || mb_strlen($name) > 80) {
@@ -82,7 +84,7 @@ if (!preg_match('/^[0-9+()\/\s.-]{6,25}$/', $telefon) || strlen($ziffern) < 6 ||
     antwort(false, 'Bitte gib eine gültige Handynummer ein.', 422);
 }
 if ($zone === '') {
-    antwort(false, 'Bitte wähle aus, welche Zone dich interessiert.', 422);
+    antwort(false, 'Bitte wähle mindestens eine Zone aus.', 422);
 }
 
 /* --- E-Mail zusammenstellen --- */
