@@ -13,7 +13,7 @@
 
   const KEY = 'hg-consent';
   const GUELTIG_MS = 365 * 24 * 60 * 60 * 1000;   // 12 Monate
-  const BANNER_VERSION = '2026-09';                 // bei neuem Banner-Text erhöhen => alle werden neu gefragt
+  const BANNER_VERSION = '2026-11';                 // bei neuem Banner-Text erhöhen => alle werden neu gefragt
   // Protokoll-Adresse relativ zu dieser Datei (funktioniert auch auf der Danke-Seite im Unterordner)
   const LOG_URL = new URL('consent-log.php', document.currentScript ? document.currentScript.src : location.href).href;
   const banner = document.getElementById('consent');
