@@ -1863,3 +1863,15 @@ a.google-badge:hover { transform: translateY(-2px); }
   .callback-section .callback-card { margin-top: 1.4rem; }
   .callback-section__trial { margin-top: 1.2rem; }
 }
+
+/* WhatsApp als Alternative direkt unter dem Formular */
+.callback__alt { margin-top: 1.3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); text-align: center; }
+.callback__alt-title { margin-bottom: .7rem; font-size: .92rem; font-weight: 500; color: var(--text); }
+.callback__wa {
+  display: flex; align-items: center; justify-content: center; gap: .6rem; width: 100%;
+  padding: .85rem 1rem; border-radius: 6px; background: #fff; color: var(--text);
+  border: 1px solid #25D366; font-size: .92rem; font-weight: 500; transition: background .25s;
+}
+.callback__wa:hover { background: rgba(37, 211, 102, .1); }
+.callback__wa-icon { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #25D366; color: #fff; }
+.callback__wa-icon svg { width: 16px; height: 16px; }
