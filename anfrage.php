@@ -90,6 +90,8 @@ if ($zone === '') {
 /* --- E-Mail zusammenstellen --- */
 $betreff = 'Rückruf-Anfrage Landingpage: ' . $name . ' (' . $zone . ')';
 $eingang = (new DateTimeImmutable('now', new DateTimeZone('Europe/Berlin')))->format('d.m.Y, H:i');
+// Nur für den Abgleich mit den Meta-Zahlen: lag beim Absenden die Marketing-Einwilligung vor?
+$metaMessung = (string)($_POST['consent'] ?? '') === 'all' ? 'Ja (Alle akzeptieren)' : 'Nein (keine Einwilligung)';
 $text = "Neue Rückruf-Anfrage über die Landingpage\n"
       . "==========================================\n\n"
       . "Name:          {$name}\n"
@@ -97,6 +99,7 @@ $text = "Neue Rückruf-Anfrage über die Landingpage\n"
       . "Zone:          {$zone}\n"
       . "Erreichbar:    " . ($zeit !== '' ? $zeit : 'keine Angabe') . "\n"
       . "Eingegangen:   {$eingang} Uhr\n"
+      . "Meta-Messung:  {$metaMessung}\n"
       . "Formular:      " . ($position !== '' ? $position : 'unbekannt') . "\n"
       . ($quelle !== '' ? "Herkunft/Link: {$quelle}\n" : '')
       . "\nDie Person bittet um einen Rückruf zur Terminvereinbarung.\n";
