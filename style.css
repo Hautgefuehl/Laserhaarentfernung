@@ -1875,3 +1875,35 @@ a.google-badge:hover { transform: translateY(-2px); }
 .callback__wa:hover { background: rgba(37, 211, 102, .1); }
 .callback__wa-icon { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #25D366; color: #fff; }
 .callback__wa-icon svg { width: 16px; height: 16px; }
+
+/* Etikett "nur Frauen" in Formular und Preisliste */
+.only-women {
+  display: inline-block; margin-left: .35rem; padding: .18rem .5rem; border-radius: 999px;
+  background: #9E7430; color: #fff; font-family: var(--f-body); font-style: normal;
+  font-size: .62rem; font-weight: 700; letter-spacing: .08em; line-height: 1.2;
+  text-transform: uppercase; vertical-align: .12em; white-space: nowrap;
+}
+.chip input:checked + span .only-women { background: #fff; color: #9E7430; }
+.price h3 .only-women { font-size: .6rem; vertical-align: .3em; }
+
+/* Probebehandlung im Formular: eigene, deutlich hervorgehobene Auswahl */
+.chip--trial { flex: 1 1 100%; }
+.chip--trial span {
+  display: flex; align-items: center; justify-content: space-between; gap: .6rem; width: 100%;
+  padding: .7rem 1rem; border-radius: 14px; border: 2px solid var(--mint-dark);
+  background: linear-gradient(140deg, #D3ECE4, #FFFFFF); color: var(--text); font-size: .9rem; line-height: 1.3;
+}
+.chip--trial span strong { font-weight: 700; color: #2F6F62; }
+.chip--trial:hover span { border-color: #2F6F62; }
+.trial-price {
+  flex: none; padding: .2rem .6rem; border-radius: 999px; background: #2F6F62; color: #fff;
+  font-style: normal; font-weight: 700; font-size: .85rem; white-space: nowrap;
+}
+.chip--trial input:checked + span { background: #2F6F62; border-color: #2F6F62; color: #fff; }
+.chip--trial input:checked + span strong { color: #fff; }
+.chip--trial input:checked + span .trial-price { background: #fff; color: #2F6F62; }
+.chip--trial + .chip { margin-top: .15rem; }
+/* Probebehandlung: innerer Text ohne Chip-Rahmen, Feld bleibt in der Karte */
+.chip--trial { max-width: 100%; }
+.chip--trial > span { box-sizing: border-box; }
+.chip--trial .trial-text { display: inline; padding: 0; border: 0; border-radius: 0; background: none; font-size: inherit; color: inherit; }

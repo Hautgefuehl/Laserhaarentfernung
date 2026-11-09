@@ -69,7 +69,7 @@ $name    = $bereinigen((string)($_POST['name'] ?? ''));
 $telefon = $bereinigen((string)($_POST['telefon'] ?? ''));
 $quelle  = substr($bereinigen((string)($_POST['quelle'] ?? '')), 0, 200);
 $position = substr($bereinigen((string)($_POST['position'] ?? '')), 0, 40);
-$zonen  = ['Achseln', 'Bikinizone (nur Frauen)', 'Intim komplett (nur Frauen)', 'Beine', 'Gesicht', 'Arme', 'Rücken / Schultern', 'Brust / Bauch', 'Po / Pofalte (nur Frauen)', 'Hals / Nacken', 'Bart / Wangen', 'Andere'];
+$zonen  = ['Probebehandlung (Testschuss, 10 €)', 'Achseln', 'Bikinizone (nur Frauen)', 'Intim komplett (nur Frauen)', 'Beine', 'Gesicht', 'Arme', 'Rücken / Schultern', 'Brust / Bauch', 'Po / Pofalte (nur Frauen)', 'Hals / Nacken', 'Bart-/Wangenkontur', 'Andere'];
 $zeiten = ['Vormittag', 'Nachmittag', 'Abend'];
 // Mehrfachauswahl: nur bekannte Zonen übernehmen, in fester Reihenfolge
 $gewaehlt = (array)($_POST['zone'] ?? []);
